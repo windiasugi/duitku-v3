@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duitku - Aplikasi Pengelolaan Keuangan</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top"
+                style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <div style="flex-grow: 1; text-align: center;">
+                    <h1><i class="fa-solid fa-cloud"></i> Duitku V3</h1>
+                    <p>Kelola Keuangan Pribadimu di Cloud</p>
+                </div>
+                <button id="logout-btn" class="btn"
+                    style="display: none; width: auto; padding: 0.4rem 0.8rem; font-size: 0.85rem; margin-top: 0; position: absolute; right: 2rem;"><i
+                        class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+            </div>
+        </header>
+
+        <section id="auth-view" class="auth-section">
+            <div class="form-container" style="max-width: 400px; margin: 0 auto; padding-top: 1rem;">
+                <h3 id="auth-title" style="justify-content: center; font-size: 1.25rem;"><i
+                        class="fa-solid fa-lock"></i> Masuk ke Akun</h3>
+                <form id="auth-form">
+                    <div class="form-control">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="contoh@email.com" required />
+                    </div>
+                    <div class="form-control">
+                        <label for="password">Kata Sandi</label>
+                        <input type="password" id="password" placeholder="Minimal 6 karakter" required minlength="6" />
+                    </div>
+                    <button class="btn" type="submit" id="auth-submit-btn">Masuk</button>
+                </form>
+                <div style="text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                    <span id="auth-switch-text">Belum punya akun? </span>
+                    <a href="#" id="switch-auth-mode"
+                        style="color: var(--primary); font-weight: 600; text-decoration: none;">Daftar di sini</a>
+                </div>
+                <div id="auth-error"
+                    style="color: var(--danger); text-align: center; margin-top: 1rem; font-size: 0.85rem; display: none; background: #fee2e2; padding: 0.5rem; border-radius: 6px;">
+                </div>
+                <div id="auth-success"
+                    style="color: var(--primary); text-align: center; margin-top: 1rem; font-size: 0.85rem; display: none; background: #d1fae5; padding: 0.5rem; border-radius: 6px;">
+                </div>
+            </div>
+        </section>
+
+        <div id="app-view" style="display: none;">
+
+            <section class="dashboard">
+                <div class="balance-card">
+                    <h2>Total Saldo (Sesuai Filter)</h2>
+                    <h3 id="balance">Rp 0</h3>
+                </div>
+                <div class="summary-cards">
+                    <div class="card income">
+                        <h4>Pemasukan</h4>
+                        <p id="total-income" class="money plus">+ Rp 0</p>
+                    </div>
+                    <div class="card expense">
+                        <h4>Pengeluaran</h4>
+                        <p id="total-expense" class="money minus">- Rp 0</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="filter-section">
+                <h3><i class="fa-solid fa-filter"></i> Filter Transaksi</h3>
+                <div class="filters">
+                    <div class="filter-group">
+                        <input type="text" id="search-text" placeholder="Cari nama atau kategori...">
+                    </div>
+                    <div class="filter-group">
+                        <select id="filter-category">
+                            <option value="all">Semua Tipe</option>
+                            <option value="income">Pemasukan</option>
+                            <option value="expense">Pengeluaran</option>
+                        </select>
+                    </div>
+                    <div class="date-filters filter-group">
+                        <input type="date" id="filter-start-date" title="Tanggal Mulai">
+                        <span>-</span>
+                        <input type="date" id="filter-end-date" title="Tanggal Akhir">
+                    </div>
+                </div>
+            </section>
+
+            <section class="transaction-section">
+                <div class="form-container">
+                    <h3><i class="fa-solid fa-plus-circle"></i> Tambah Transaksi Baru</h3>
+                    <form id="transaction-form">
+                        <div class="form-control">
+                            <label for="date">Tanggal</label>
+                            <input type="date" id="date" required />
+                        </div>
+                        <div class="form-control">
+                            <label for="text">Keterangan</label>
+                            <input type="text" id="text" placeholder="Contoh: Gaji, Makan, Belanja..." required />
+                        </div>
+                        <div class="form-control">
+                            <label for="amount">Nominal (Rp)</label>
+                            <input type="number" id="amount" placeholder="Contoh: 50000" min="1" required />
+                        </div>
+                        <div class="form-control">
+                            <label for="category">Kategori</label>
+                            <select id="category" required>
+                                <option value="income">Pemasukan</option>
+                                <option value="expense" selected>Pengeluaran</option>
+                            </select>
+                        </div>
+                        <div class="form-control">
+                            <label for="subcategory">Sub-kategori</label>
+                            <select id="subcategory" required>
+                                <!-- Options will be populated by JS -->
+                            </select>
+                        </div>
+                        <button class="btn" type="submit">Catat Transaksi</button>
+                    </form>
+                </div>
+
+                <div class="history-container">
+                    <h3><i class="fa-solid fa-list"></i> Riwayat Transaksi</h3>
+                    <ul id="list" class="list">
+                        <!-- Transactions will be added here dynamically -->
+                    </ul>
+                </div>
+            </section>
+        </div> <!-- End of app-view -->
+    </div>
+
+    <!-- Supabase SDK (UMD build) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
