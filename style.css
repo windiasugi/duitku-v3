@@ -90,7 +90,7 @@ header p {
 }
 
 .balance-card h3 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
@@ -118,7 +118,7 @@ header p {
 }
 
 .summary-cards .money {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
@@ -178,6 +178,12 @@ header p {
 .filters input:focus,
 .filters select:focus {
     border-color: var(--primary);
+}
+
+::placeholder {
+    color: #94a3b8;
+    /* Darker grey placeholder */
+    opacity: 1;
 }
 
 .date-filters {
@@ -398,4 +404,25 @@ select:focus {
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid var(--border-color);
+}
+
+#logout-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: auto;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    margin-top: 0;
+    z-index: 10;
+}
+
+@media (max-width: 480px) {
+    .balance-card h3 {
+        font-size: 1.6rem;
+    }
+
+    .summary-cards .money {
+        font-size: 1rem;
+    }
 }
