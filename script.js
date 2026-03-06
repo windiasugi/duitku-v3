@@ -305,18 +305,22 @@ function renderApp() {
 
             // Konstruksi DOM yang aman dari XSS
             item.innerHTML = `
-                <div class="details">
-                    <div class="meta">
-                        <span class="badge"></span>
+                <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                    <div class="meta" style="margin-bottom:0;">
                         <span><i class="fa-regular fa-calendar"></i> ${t.date}</span>
                     </div>
-                    <span class="desc"></span>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="amount ${liClass}">${formatRupiah(Math.abs(t.amount))}</span>
+                        <button class="delete-btn" title="Hapus Transaksi" style="padding: 4px 8px;">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
                 </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                   <span class="amount ${liClass}">${formatRupiah(Math.abs(t.amount))}</span>
-                   <button class="delete-btn" title="Hapus Transaksi">
-                       <i class="fa-solid fa-trash-can"></i>
-                   </button>
+                <div class="details" style="margin-top: 4px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="badge"></span>
+                        <span class="desc"></span>
+                    </div>
                 </div>
             `;
 
