@@ -345,8 +345,8 @@ function updateValues(items) {
     const expense = amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0) * -1;
 
     balance.innerText = formatRupiah(total);
-    money_plus.innerText = `+ ${formatRupiah(income)}`;
-    money_minus.innerText = `- ${formatRupiah(expense)}`;
+    money_plus.innerText = formatRupiah(income);
+    money_minus.innerText = formatRupiah(expense);
 }
 
 // Event Listeners for filters
