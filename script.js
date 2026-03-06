@@ -300,24 +300,33 @@ function renderApp() {
             const item = document.createElement('li');
             item.classList.add(liClass);
 
-            // Note for name vs text based on what Supabase table has
-            const displayName = t.text || t.name || 'Tanpa Keterangan';
+            const displayName = t.name || t.text || 'Tanpa Keterangan';
+            const displaySubcat = t.subcategory || t.sub_category || 'Lainnya';
 
+            // Konstruksi DOM yang aman dari XSS
             item.innerHTML = `
                 <div class="details">
-                    <span class="desc">${displayName}</span>
+                    <span class="desc"></span>
                     <div class="meta">
                         <span><i class="fa-regular fa-calendar"></i> ${t.date}</span>
-                        <span class="badge">${t.subcategory}</span>
+                        <span class="badge"></span>
                     </div>
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
                    <span class="amount ${liClass}">${formatRupiah(Math.abs(t.amount))}</span>
-                   <button class="delete-btn" onclick="removeTransaction('${t.id}')">
+                   <button class="delete-btn" title="Hapus Transaksi">
                        <i class="fa-solid fa-trash-can"></i>
                    </button>
                 </div>
             `;
+
+            // Set teks menggunakan textContent agar aman dari XSS
+            item.querySelector('.desc').textContent = displayName;
+            item.querySelector('.badge').textContent = displaySubcat;
+
+            // Gunakan addEventListener alih-alih onclick inline
+            item.querySelector('.delete-btn').addEventListener('click', () => removeTransaction(t.id));
+
             list.appendChild(item);
         });
     }
@@ -344,5 +353,4 @@ filterEndDateInput.addEventListener('change', renderApp);
 
 form.addEventListener('submit', addTransaction);
 
-// Bind removeTransaction tightly to window
-window.removeTransaction = removeTransaction;
+// Transaction removal is now handled via addEventListener in renderApp
