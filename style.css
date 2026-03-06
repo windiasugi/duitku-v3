@@ -48,7 +48,8 @@ header {
     margin-bottom: 2rem;
     position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 header h1 {
@@ -77,6 +78,9 @@ header p {
     color: white;
     padding: 1.5rem;
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     box-shadow: var(--shadow-md);
     margin-bottom: 1.5rem;
@@ -306,6 +310,12 @@ select:focus {
     border-left-color: var(--danger);
 }
 
+.list li {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+}
+
 .list li .details {
     display: flex;
     flex-direction: column;
@@ -407,13 +417,11 @@ select:focus {
 }
 
 #logout-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    align-self: flex-end;
+    margin-bottom: 0.5rem;
     width: auto;
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
-    margin-top: 0;
     z-index: 10;
 }
 
